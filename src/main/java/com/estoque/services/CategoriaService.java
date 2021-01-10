@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estoque.domain.Categoria;
+import com.estoque.dto.CategoriaDTO;
 import com.estoque.repository.CategoriaRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -16,6 +17,7 @@ public class CategoriaService {
 	
 	@Autowired
 	private CategoriaRepository categoriasRepository;
+	
 	
 	public Categoria find(Integer id) throws ObjectNotFoundException {
 		Optional<Categoria> obj = categoriasRepository.findById(id);
@@ -30,6 +32,15 @@ public class CategoriaService {
 			List<Categoria> obj = categoriasRepository.findAll();
 			return obj;
 		}
+	}
+	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return categoriasRepository.save(obj);
+	}
+
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 
 }

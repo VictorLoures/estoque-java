@@ -19,17 +19,17 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class ProdutosResource {
 
 	@Autowired
-	private ProdutoService categoriaService;
+	private ProdutoService produtoService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Produtos> find(@PathVariable Integer id) throws ObjectNotFoundException{
-		Produtos obj = categoriaService.find(id);
+		Produtos obj = produtoService.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public ResponseEntity<List<Produtos>> findAll() throws ObjectNotFoundException{
-		List<Produtos> obj = categoriaService.findAll();
+		List<Produtos> obj = produtoService.findAll();
 		return ResponseEntity.ok().body(obj);
 	}
 	
