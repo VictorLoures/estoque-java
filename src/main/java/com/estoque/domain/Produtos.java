@@ -9,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,12 +26,11 @@ public class Produtos implements Serializable{
 	private Double preco;
 	private Integer qte;
 	
-	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA",
-		joinColumns = @JoinColumn(name = "produto_id"),
-		inverseJoinColumns = @JoinColumn(name = "categoria_id")
-	)
-	private List<Categoria> categorias = new ArrayList<>();
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
+	private Categoria categorias;
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "produtos")
@@ -81,11 +80,11 @@ public class Produtos implements Serializable{
 		this.qte = qte;
 	}
 
-	public List<Categoria> getCategoria() {
+	public Categoria getCategoria() {
 		return categorias;
 	}
 
-	public void setCategoria(List<Categoria> categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categorias = categoria;
 	}
 	

@@ -42,10 +42,6 @@ public class EstoqueApplication implements CommandLineRunner {
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2));
 		cat2.getProdutos().addAll(Arrays.asList(p3));
 		
-		p1.getCategoria().addAll(Arrays.asList(cat1));
-		p2.getCategoria().addAll(Arrays.asList(cat1));
-		p3.getCategoria().addAll(Arrays.asList(cat2));
-		
 		u1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		
 		Usuario u2 = new Usuario(null, "Victor");
@@ -59,10 +55,6 @@ public class EstoqueApplication implements CommandLineRunner {
 		
 		cat3.getProdutos().addAll(Arrays.asList(p5, p6));
 		cat4.getProdutos().addAll(Arrays.asList(p4));
-		
-		p4.getCategoria().addAll(Arrays.asList(cat4));
-		p5.getCategoria().addAll(Arrays.asList(cat3));
-		p6.getCategoria().addAll(Arrays.asList(cat3));
 		
 		u2.getProdutos().addAll(Arrays.asList(p4, p5, p6));
 

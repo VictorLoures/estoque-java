@@ -23,7 +23,7 @@ public class Usuario implements Serializable{
 	private String nome;
 	
 	@ManyToMany
-	@JoinTable(name = "CATEGORIAS_CLIENTE", joinColumns = @JoinColumn(name = "categoria_id"),
+	@JoinTable(name = "CATEGORIAS_CLIENTE", joinColumns = @JoinColumn(name = "produtos_id"),
 	inverseJoinColumns = @JoinColumn(name="usuario_id"))
 	private List<Produtos> produtos = new ArrayList<>();
 	

@@ -33,4 +33,9 @@ public class ProdutosResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable Integer id) {
+		produtoService.delet(id);		
+	}
+	
 }

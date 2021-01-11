@@ -31,5 +31,9 @@ public class ProdutoService {
 			return obj;
 		}
 	}
+	
+	public void delet(Integer id) {
+		categoriasRepository.deleteById(id);
+	}
 
 }
