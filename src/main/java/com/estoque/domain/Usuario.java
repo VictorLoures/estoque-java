@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 public class Usuario implements Serializable{
 
@@ -22,9 +25,9 @@ public class Usuario implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@ManyToMany
-	@JoinTable(name = "CATEGORIAS_CLIENTE", joinColumns = @JoinColumn(name = "produtos_id"),
-	inverseJoinColumns = @JoinColumn(name="usuario_id"))
+	@ManyToMany	
+	@JoinTable(name = "CATEGORIAS_CLIENTE", joinColumns = @JoinColumn(name = "usuario_id"),
+	inverseJoinColumns = @JoinColumn(name="produtos_id"))
 	private List<Produtos> produtos = new ArrayList<>();
 	
 	public Usuario() {

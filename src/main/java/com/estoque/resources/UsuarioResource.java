@@ -31,5 +31,10 @@ public class UsuarioResource {
 		List<Usuario> obj = usuarioService.findAll();
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable Integer id) {
+		usuarioService.delet(id);		
+	}
 
 }

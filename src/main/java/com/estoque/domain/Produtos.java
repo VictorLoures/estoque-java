@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -27,9 +30,10 @@ public class Produtos implements Serializable{
 	private Integer qte;
 	
 	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
+	@Cascade(value = {CascadeType.REMOVE, CascadeType.REFRESH})
 	private Categoria categorias;
 	
 	@JsonIgnore

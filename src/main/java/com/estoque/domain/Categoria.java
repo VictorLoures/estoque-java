@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +24,7 @@ public class Categoria implements Serializable{
 	
 	
 	@JsonIgnore
-	@OneToMany (mappedBy = "categorias", cascade = CascadeType.ALL)	
+	@OneToMany (mappedBy = "categorias", orphanRemoval = true)	
 	private List<Produtos> produtos = new ArrayList<Produtos>();
 
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.estoque.domain.Categoria;
 import com.estoque.dto.CategoriaDTO;
 import com.estoque.services.CategoriaService;
+import com.estoque.services.NativeScriptService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -23,6 +24,8 @@ public class CategoriaResource {
 
 	@Autowired
 	private CategoriaService categoriaService;
+	@Autowired
+	private NativeScriptService nss;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) throws ObjectNotFoundException{
@@ -41,6 +44,12 @@ public class CategoriaResource {
 		Categoria obj = categoriaService.fromDTO(objDto);
 		obj = categoriaService.insert(obj);
 		
+	}
+	
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable Integer id) {
+		nss.execute("DELETE FROM `categorias_cliente` WHERE produtos_id = " + id + " ;");
+		categoriaService.delet(id);		
 	}
 	
 	}

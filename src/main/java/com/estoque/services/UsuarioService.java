@@ -15,21 +15,26 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class UsuarioService {
 	
 	@Autowired
-	private UsuarioRepository categoriasRepository;
+	private UsuarioRepository usuarioRepository;
 	
 	public Usuario find(Integer id) throws ObjectNotFoundException {
-		Optional<Usuario> obj = categoriasRepository.findById(id);
+		Optional<Usuario> obj = usuarioRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
 	
 	public List<Usuario> findAll() throws ObjectNotFoundException {
-		if(categoriasRepository.findAll() == null) {
+		if(usuarioRepository.findAll() == null) {
 			return null;
 		}else {
-			List<Usuario> obj = categoriasRepository.findAll();
+			List<Usuario> obj = usuarioRepository.findAll();
 			return obj;
 		}
 	}
+	
+	public void delet(Integer id) {
+		usuarioRepository.deleteById(id);
+	}
+
 
 }

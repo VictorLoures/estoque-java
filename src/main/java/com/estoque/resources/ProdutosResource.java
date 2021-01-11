@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.domain.Produtos;
+import com.estoque.services.NativeScriptService;
 import com.estoque.services.ProdutoService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -20,6 +21,8 @@ public class ProdutosResource {
 
 	@Autowired
 	private ProdutoService produtoService;
+	@Autowired
+	private NativeScriptService nss;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Produtos> find(@PathVariable Integer id) throws ObjectNotFoundException{
