@@ -38,6 +38,7 @@ public class ProdutosResource {
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable Integer id) {
+		nss.execute("DELETE FROM `produtos_cliente` WHERE produtos_id = " + id + " ;");
 		produtoService.delet(id);		
 	}
 	

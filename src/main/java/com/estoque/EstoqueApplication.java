@@ -35,6 +35,9 @@ public class EstoqueApplication implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Cama, Mesa e Banho");
 		
+		u1.getCategorias().addAll(Arrays.asList(cat1, cat2));
+
+		
 		Produtos p1 = new Produtos(null, "Computador", 2000.00, 1);
 		Produtos p2 = new Produtos(null, "Impressora", 800.00, 1);
 		Produtos p3 = new Produtos(null, "Toalha", 30.00, 1);
@@ -52,6 +55,8 @@ public class EstoqueApplication implements CommandLineRunner {
 		
 		Categoria cat3 = new Categoria(null, "Movéis");
 		Categoria cat4 = new Categoria(null, "Peças de Carro");
+		
+		u2.getCategorias().addAll(Arrays.asList(cat3, cat4));
 		
 		Produtos p4 = new Produtos(null, "Roda", 200.00, 1);
 		Produtos p5 = new Produtos(null, "Cama", 800.00, 1);

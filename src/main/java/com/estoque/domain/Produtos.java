@@ -33,7 +33,6 @@ public class Produtos implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
-	@Cascade(value = {CascadeType.REMOVE, CascadeType.REFRESH})
 	private Categoria categorias;
 	
 	@JsonIgnore

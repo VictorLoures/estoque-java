@@ -26,9 +26,16 @@ public class Usuario implements Serializable{
 	private String nome;
 	
 	@ManyToMany	
-	@JoinTable(name = "CATEGORIAS_CLIENTE", joinColumns = @JoinColumn(name = "usuario_id"),
+	@JoinTable(name = "PRODUTOS_CLIENTE", joinColumns = @JoinColumn(name = "usuario_id"),
 	inverseJoinColumns = @JoinColumn(name="produtos_id"))
+	@Cascade(value = {CascadeType.DELETE, CascadeType.REFRESH})
 	private List<Produtos> produtos = new ArrayList<>();
+	
+	@ManyToMany	
+	@JoinTable(name = "CATEGORIAS_USUARIO", joinColumns = @JoinColumn(name = "usuario_id"),
+	inverseJoinColumns = @JoinColumn(name="categoria_id"))
+	@Cascade(value = {CascadeType.DELETE,CascadeType.REFRESH})
+	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Usuario() {
 		
@@ -62,6 +69,14 @@ public class Usuario implements Serializable{
 
 	public void setProdutos(List<Produtos> produtos) {
 		this.produtos = produtos;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 	
 	
