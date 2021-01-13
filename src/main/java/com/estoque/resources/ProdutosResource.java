@@ -42,4 +42,16 @@ public class ProdutosResource {
 		produtoService.delet(id);		
 	}
 	
+	@RequestMapping(value="/nome", method=RequestMethod.GET)
+	public ResponseEntity<List<Produtos>> ordenarPorNome() throws ObjectNotFoundException{
+		List<Produtos> obj = produtoService.ordenarPornome();
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(value="/codigo", method=RequestMethod.GET)
+	public ResponseEntity<List<Produtos>> ordenarPorCodigo() throws ObjectNotFoundException{
+		List<Produtos> obj = produtoService.ordenarPorCodigo();
+		return ResponseEntity.ok().body(obj);
+	}
+	
 }

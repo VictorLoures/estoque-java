@@ -35,5 +35,12 @@ public class ProdutoService {
 	public void delet(Integer id) {
 		categoriasRepository.deleteById(id);
 	}
-
+	
+	public List<Produtos> ordenarPornome(){
+		return categoriasRepository.oPNome();
+	}
+	
+	public List<Produtos> ordenarPorCodigo(){
+		return categoriasRepository.oPCodigo();
+	}
 }

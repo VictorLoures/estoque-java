@@ -30,7 +30,7 @@ public class EstoqueApplication implements CommandLineRunner {
 	
 	public void run(String ... args) {
 		
-		Usuario u1 = new Usuario(null, "Erica");
+		Usuario u1 = new Usuario(null, "Erica", "123");
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Cama, Mesa e Banho");
@@ -51,7 +51,7 @@ public class EstoqueApplication implements CommandLineRunner {
 		
 		u1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		
-		Usuario u2 = new Usuario(null, "Victor");
+		Usuario u2 = new Usuario(null, "Victor", "123");
 		
 		Categoria cat3 = new Categoria(null, "Movéis");
 		Categoria cat4 = new Categoria(null, "Peças de Carro");

@@ -24,25 +24,27 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String senha;
 	
 	@ManyToMany	
 	@JoinTable(name = "PRODUTOS_CLIENTE", joinColumns = @JoinColumn(name = "usuario_id"),
 	inverseJoinColumns = @JoinColumn(name="produtos_id"))
-	@Cascade(value = {CascadeType.DELETE, CascadeType.REFRESH})
 	private List<Produtos> produtos = new ArrayList<>();
 	
 	@ManyToMany	
 	@JoinTable(name = "CATEGORIAS_USUARIO", joinColumns = @JoinColumn(name = "usuario_id"),
 	inverseJoinColumns = @JoinColumn(name="categoria_id"))
 	@Cascade(value = {CascadeType.DELETE,CascadeType.REFRESH})
+	@JoinColumn(name = "usuario_id")
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Usuario() {
 		
 	}
 
-	public Usuario(Integer id, String nome) {
+	public Usuario(Integer id, String nome, String senha) {
 		super();
+		this.senha = senha;
 		this.id = id;
 		this.nome = nome;
 	}
@@ -77,6 +79,14 @@ public class Usuario implements Serializable{
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	

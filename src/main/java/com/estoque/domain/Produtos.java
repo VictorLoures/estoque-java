@@ -12,9 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -27,7 +24,7 @@ public class Produtos implements Serializable{
 	private Integer id;
 	private String nome;
 	private Double preco;
-	private Integer qte;
+	private Integer total;
 	
 	
 
@@ -48,7 +45,7 @@ public class Produtos implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
-		this.qte = qte;
+		this.total = qte;
 	}
 
 	public Integer getId() {
@@ -76,11 +73,11 @@ public class Produtos implements Serializable{
 	}
 
 	public Integer getQte() {
-		return qte;
+		return total;
 	}
 
 	public void setQte(Integer qte) {
-		this.qte = qte;
+		this.total = qte;
 	}
 
 	public Categoria getCategoria() {
