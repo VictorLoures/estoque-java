@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.estoque.domain.Categoria;
 import com.estoque.domain.Produtos;
@@ -23,6 +24,8 @@ public class EstoqueApplication implements CommandLineRunner {
 	private ProdutosRepository produtosRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EstoqueApplication.class, args);
@@ -30,7 +33,7 @@ public class EstoqueApplication implements CommandLineRunner {
 	
 	public void run(String ... args) {
 		
-		Usuario u1 = new Usuario(null, "Erica", "123");
+		Usuario u1 = new Usuario(null, "Erica", pe.encode("123"));
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Cama, Mesa e Banho");
@@ -51,7 +54,7 @@ public class EstoqueApplication implements CommandLineRunner {
 		
 		u1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		
-		Usuario u2 = new Usuario(null, "Victor", "123");
+		Usuario u2 = new Usuario(null, "Victor", pe.encode("123"));
 		
 		Categoria cat3 = new Categoria(null, "Movéis");
 		Categoria cat4 = new Categoria(null, "Peças de Carro");
