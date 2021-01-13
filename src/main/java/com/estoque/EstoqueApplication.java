@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.estoque.domain.Categoria;
 import com.estoque.domain.Produtos;
 import com.estoque.domain.Usuario;
+import com.estoque.domain.enums.Perfil;
 import com.estoque.repository.CategoriaRepository;
 import com.estoque.repository.ProdutosRepository;
 import com.estoque.repository.UsuarioRepository;
@@ -33,7 +34,8 @@ public class EstoqueApplication implements CommandLineRunner {
 	
 	public void run(String ... args) {
 		
-		Usuario u1 = new Usuario(null, "Erica", pe.encode("123"));
+		Usuario u1 = new Usuario(null, "Erica", pe.encode("123"), "erica@projetusti.com");
+		u1.addPerfil(Perfil.ADMIN);
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Cama, Mesa e Banho");
@@ -54,7 +56,8 @@ public class EstoqueApplication implements CommandLineRunner {
 		
 		u1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		
-		Usuario u2 = new Usuario(null, "Victor", pe.encode("123"));
+		Usuario u2 = new Usuario(null, "Victor", pe.encode("123"), "victorloures10@gmail.com");
+		u2.addPerfil(Perfil.ADMIN);
 		
 		Categoria cat3 = new Categoria(null, "Movéis");
 		Categoria cat4 = new Categoria(null, "Peças de Carro");
