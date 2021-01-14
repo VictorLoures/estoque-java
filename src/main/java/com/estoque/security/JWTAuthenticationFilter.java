@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,11 +20,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.estoque.dto.CredenciaisDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+	
 	private AuthenticationManager authenticationManager;
 	
 	private JWTUtil jwtUtil;
+	
+	private String username;
 	
 	 public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
 		 setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
@@ -49,11 +53,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			}
 		}
 	
+	 @Bean
 	protected void successfulAuthentication(HttpServletRequest req,
 											HttpServletResponse res,
 											FilterChain chain,
 											Authentication auth) throws IOException, ServletException{
-		String username = ((UserSS) auth.getPrincipal()).getUsername();
+		username = ((UserSS) auth.getPrincipal()).getUsername();
+		jwtUtil.setUsuarioLogado(username);
 		String token = jwtUtil.generateToken(username);
 		res.addHeader("Authorization", "Bearer " + token);
 		
@@ -79,6 +85,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 + "\"path\": \"/login\"}";
         }
     }
+
+	public String getUsername() {
+		return username;
+	}
+	
+	public void SetUserName(String u){
+		this.username = u;
+	}
 }
 	
 

@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/categorias/**",
 			"/produtos/**",
 			"/usuario/**",
-			"/h2-console"
+			"/h2-console",
+			"/usuariologado/**"
 	};
 	
 	@Override

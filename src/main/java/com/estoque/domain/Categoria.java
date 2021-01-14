@@ -23,6 +23,7 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String usuario;
 	
 	
 	@JsonIgnore
@@ -36,8 +37,9 @@ public class Categoria implements Serializable{
 	
 	public Categoria() {}
 
-	public Categoria(Integer id, String nome) {
+	public Categoria(Integer id, String nome, String usuario) {
 		super();
+		this.usuario = usuario;
 		this.id = id;
 		this.nome = nome;
 	}
@@ -64,6 +66,14 @@ public class Categoria implements Serializable{
 
 	public void setProdutos(List<Produtos> produtos) {
 		this.produtos = produtos;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 

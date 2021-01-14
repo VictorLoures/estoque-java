@@ -39,8 +39,8 @@ public class CategoriaService {
 		return categoriasRepository.save(obj);
 	}
 
-	public Categoria fromDTO(CategoriaDTO objDto) {
-		return new Categoria(objDto.getId(), objDto.getNome());
+	public Categoria fromDTO(CategoriaDTO objDto) {		
+		return new Categoria(objDto.getId(), objDto.getNome(), objDto.getUsuario());
 	}
 	
 	public void delet(Integer id) {

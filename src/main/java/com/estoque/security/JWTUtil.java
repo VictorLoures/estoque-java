@@ -10,18 +10,25 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JWTUtil {
+	
+	private String username;
 
 	@Value("${jwt.secret}")
 	private String secret;
-	
+
 	@Value("${jwt.expiration}")
 	private Long expiration;
-	
+
 	public String generateToken(String username) {
-		return Jwts.builder().setSubject(username)
-				.setExpiration(new Date(System.currentTimeMillis() + expiration))
-				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
-				.compact();
+		return Jwts.builder().setSubject(username).setExpiration(new Date(System.currentTimeMillis() + expiration))
+				.signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
+	}
+
+	public void setUsuarioLogado(String username) {
+		this.username =  username;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
 }

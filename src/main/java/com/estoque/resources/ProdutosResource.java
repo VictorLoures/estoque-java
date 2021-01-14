@@ -52,6 +52,9 @@ public class ProdutosResource {
 	public ResponseEntity<List<Produtos>> ordenarPorCodigo() throws ObjectNotFoundException{
 		List<Produtos> obj = produtoService.ordenarPorCodigo();
 		return ResponseEntity.ok().body(obj);
-	}
-	
+	}	
+		
+ 
 }
+	
+

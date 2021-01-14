@@ -37,8 +37,8 @@ public class EstoqueApplication implements CommandLineRunner {
 		Usuario u1 = new Usuario(null, "Erica", pe.encode("123"), "erica@projetusti.com");
 		u1.addPerfil(Perfil.ADMIN);
 		
-		Categoria cat1 = new Categoria(null, "Informática");
-		Categoria cat2 = new Categoria(null, "Cama, Mesa e Banho");
+		Categoria cat1 = new Categoria(null, "Informática", "Erica");
+		Categoria cat2 = new Categoria(null, "Cama, Mesa e Banho", "Erica");
 		
 		u1.getCategorias().addAll(Arrays.asList(cat1, cat2));
 
@@ -59,8 +59,8 @@ public class EstoqueApplication implements CommandLineRunner {
 		Usuario u2 = new Usuario(null, "Victor", pe.encode("123"), "victorloures10@gmail.com");
 		u2.addPerfil(Perfil.ADMIN);
 		
-		Categoria cat3 = new Categoria(null, "Movéis");
-		Categoria cat4 = new Categoria(null, "Peças de Carro");
+		Categoria cat3 = new Categoria(null, "Movéis", "Victor");
+		Categoria cat4 = new Categoria(null, "Peças de Carro", "Victor");
 		
 		u2.getCategorias().addAll(Arrays.asList(cat3, cat4));
 		
