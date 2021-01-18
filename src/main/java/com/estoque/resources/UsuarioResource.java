@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.domain.Usuario;
 import com.estoque.dto.UsuarioDTO;
+import com.estoque.security.JWTUtil;
 import com.estoque.services.UsuarioService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -22,6 +23,8 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class UsuarioResource {
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private JWTUtil jwtUtil;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Usuario> find(@PathVariable Integer id) throws ObjectNotFoundException{
@@ -47,9 +50,11 @@ public class UsuarioResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void update(@Validated @RequestBody UsuarioDTO objDto) {
+	public void update(@Validated @RequestBody UsuarioDTO objDto) throws ObjectNotFoundException {
 		Usuario obj = usuarioService.fromDTO(objDto);
-		usuarioService.insert(obj);
+		Integer id = usuarioService.retornaId(jwtUtil.getUsername());
+		obj.setId(id);
+		usuarioService.update(obj);
 	}
 
 }

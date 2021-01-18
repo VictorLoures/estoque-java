@@ -45,8 +45,8 @@ public class UsuarioService {
 		return new Usuario(objDto.getId(), objDto.getNome(), objDto.getSenha(), objDto.getEmail());
 	}
 	
-	public Usuario update(Usuario obj) throws ObjectNotFoundException {
-		Usuario newObj = find(obj.getId());
+	public Usuario update(Usuario obj) throws ObjectNotFoundException {		
+		Usuario newObj = find(obj.getId());	
 		updateData(newObj, obj);
 		return usuarioRepository.save(newObj);
 	}
@@ -55,6 +55,17 @@ public class UsuarioService {
 		newObj.setNome(obj.getNome());
 		newObj.setSenha(obj.getSenha());
 		newObj.setEmail(obj.getEmail());
+	}
+	
+	public Integer retornaId(String nome) {
+		Integer id = 0;
+		List<Usuario> users = usuarioRepository.findAll();
+		for(Usuario user : users) {
+			if(user.getNome().equals(nome)) {
+				id = user.getId();
+			}
+		}
+		return id;
 	}
 
 

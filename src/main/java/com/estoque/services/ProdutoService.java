@@ -1,14 +1,19 @@
 package com.estoque.services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.estoque.domain.Categoria;
 import com.estoque.domain.Produtos;
+import com.estoque.domain.Usuario;
 import com.estoque.dto.ProdutosDTO;
+import com.estoque.repository.CategoriaRepository;
 import com.estoque.repository.ProdutosRepository;
+import com.estoque.repository.UsuarioRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -17,6 +22,10 @@ public class ProdutoService {
 	
 	@Autowired
 	private ProdutosRepository produtosRepository;
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	public Produtos find(Integer id) throws ObjectNotFoundException {
 		Optional<Produtos> obj = produtosRepository.findById(id);
@@ -49,7 +58,21 @@ public class ProdutoService {
 		return new Produtos(objDto.getId(), objDto.getNome(), objDto.getPreco(), objDto.getTotal());
 	}
 
-	public void insert(Produtos obj) {
+	public void insert(Produtos obj, Integer id, String nome) {		
+		List<Categoria> cats = categoriaRepository.findAll();
+		for(Categoria cat : cats) {
+			if(cat.getId().equals(id)) {
+				obj.setCategoria(cat);	
+			}
+		}
+		
+		List<Usuario> users = usuarioRepository.findAll();
+		for(Usuario user : users) {
+			if(user.getNome().equals(nome)) {
+				user.getProdutos().addAll(Arrays.asList(obj));	
+			}
+		}		
+		
 		produtosRepository.save(obj);		
 	}
 	

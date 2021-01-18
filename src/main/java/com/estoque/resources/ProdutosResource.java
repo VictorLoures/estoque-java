@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.domain.Produtos;
 import com.estoque.dto.ProdutosDTO;
+import com.estoque.security.JWTUtil;
 import com.estoque.services.NativeScriptService;
 import com.estoque.services.ProdutoService;
 
@@ -26,6 +27,8 @@ public class ProdutosResource {
 	private ProdutoService produtoService;
 	@Autowired
 	private NativeScriptService nss;
+	@Autowired
+	private JWTUtil jwtUtil;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Produtos> find(@PathVariable Integer id) throws ObjectNotFoundException{
@@ -33,10 +36,11 @@ public class ProdutosResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
-	public void insert(@Validated @RequestBody ProdutosDTO objDto){
+	@RequestMapping(value="/{id}", method = RequestMethod.POST)
+	public void insert(@Validated @RequestBody ProdutosDTO objDto, @PathVariable Integer id){
 		Produtos obj = produtoService.fromDTO(objDto);
-		produtoService.insert(obj);
+		String nome = jwtUtil.getUsername();
+		produtoService.insert(obj, id, nome);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
