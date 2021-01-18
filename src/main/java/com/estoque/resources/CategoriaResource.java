@@ -57,6 +57,14 @@ public class CategoriaResource {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.PUT)
+	public void update(@Validated @RequestBody CategoriaDTO objDto) throws ObjectNotFoundException {
+		objDto.setUsuario(jwtUtil.getUsername());
+		Categoria obj = categoriaService.fromDTO(objDto);		
+		obj = categoriaService.update(obj);
+		
+	}
+	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable Integer id) throws ObjectNotFoundException {
 		

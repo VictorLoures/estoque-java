@@ -46,5 +46,16 @@ public class CategoriaService {
 	public void delet(Integer id) {
 		categoriasRepository.deleteById(id);
 	}
+	
+	public Categoria update(Categoria obj) throws ObjectNotFoundException {
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return categoriasRepository.save(newObj);
+	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setUsuario(obj.getUsuario());
+	}
 
 }

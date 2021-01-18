@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.domain.Usuario;
+import com.estoque.dto.UsuarioDTO;
 import com.estoque.services.UsuarioService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -35,6 +38,18 @@ public class UsuarioResource {
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable Integer id) {
 		usuarioService.delet(id);		
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public void insert(@Validated @RequestBody UsuarioDTO objDto) {
+		Usuario obj = usuarioService.fromDTO(objDto);
+		usuarioService.insert(obj);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	public void update(@Validated @RequestBody UsuarioDTO objDto) {
+		Usuario obj = usuarioService.fromDTO(objDto);
+		usuarioService.insert(obj);
 	}
 
 }

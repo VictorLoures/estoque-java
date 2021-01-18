@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estoque.domain.Produtos;
+import com.estoque.dto.ProdutosDTO;
 import com.estoque.services.NativeScriptService;
 import com.estoque.services.ProdutoService;
 
@@ -28,6 +31,18 @@ public class ProdutosResource {
 	public ResponseEntity<Produtos> find(@PathVariable Integer id) throws ObjectNotFoundException{
 		Produtos obj = produtoService.find(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public void insert(@Validated @RequestBody ProdutosDTO objDto){
+		Produtos obj = produtoService.fromDTO(objDto);
+		produtoService.insert(obj);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	public void update(@Validated @RequestBody ProdutosDTO objDto) throws ObjectNotFoundException{
+		Produtos obj = produtoService.fromDTO(objDto);
+		produtoService.update(obj);
 	}
 	
 	@RequestMapping(value="", method=RequestMethod.GET)

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estoque.domain.Produtos;
+import com.estoque.dto.ProdutosDTO;
 import com.estoque.repository.ProdutosRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -15,32 +16,52 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class ProdutoService {
 	
 	@Autowired
-	private ProdutosRepository categoriasRepository;
+	private ProdutosRepository produtosRepository;
 	
 	public Produtos find(Integer id) throws ObjectNotFoundException {
-		Optional<Produtos> obj = categoriasRepository.findById(id);
+		Optional<Produtos> obj = produtosRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Produtos.class.getName()));
 	}
 	
 	public List<Produtos> findAll() throws ObjectNotFoundException {
-		if(categoriasRepository.findAll() == null) {
+		if(produtosRepository.findAll() == null) {
 			return null;
 		}else {
-			List<Produtos> obj = categoriasRepository.findAll();
+			List<Produtos> obj = produtosRepository.findAll();
 			return obj;
 		}
 	}
 	
 	public void delet(Integer id) {
-		categoriasRepository.deleteById(id);
+		produtosRepository.deleteById(id);
 	}
 	
 	public List<Produtos> ordenarPornome(){
-		return categoriasRepository.oPNome();
+		return produtosRepository.oPNome();
 	}
 	
 	public List<Produtos> ordenarPorCodigo(){
-		return categoriasRepository.oPCodigo();
+		return produtosRepository.oPCodigo();
+	}
+	
+	public Produtos fromDTO(ProdutosDTO objDto) {		
+		return new Produtos(objDto.getId(), objDto.getNome(), objDto.getPreco(), objDto.getTotal());
+	}
+
+	public void insert(Produtos obj) {
+		produtosRepository.save(obj);		
+	}
+	
+	public Produtos update(Produtos obj) throws ObjectNotFoundException {
+		Produtos newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return produtosRepository.save(newObj);
+	}
+	
+	private void updateData(Produtos newObj, Produtos obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setPreco(obj.getPreco());
+		newObj.setTotal(obj.getTotal());
 	}
 }

@@ -40,12 +40,12 @@ public class Produtos implements Serializable{
 		
 	}
 
-	public Produtos(Integer id, String nome, Double preco, Integer qte) {
+	public Produtos(Integer id, String nome, Double preco, Integer total) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
-		this.total = qte;
+		this.total = total;
 	}
 
 	public Integer getId() {
@@ -72,11 +72,11 @@ public class Produtos implements Serializable{
 		this.preco = preco;
 	}
 
-	public Integer getQte() {
+	public Integer getTotal() {
 		return total;
 	}
 
-	public void setQte(Integer qte) {
+	public void setTotal(Integer qte) {
 		this.total = qte;
 	}
 
