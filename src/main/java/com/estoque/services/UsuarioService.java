@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.estoque.domain.Usuario;
@@ -17,6 +18,8 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Usuario find(Integer id) throws ObjectNotFoundException {
 		Optional<Usuario> obj = usuarioRepository.findById(id);
@@ -38,6 +41,7 @@ public class UsuarioService {
 	}
 	
 	public void insert(Usuario obj) {
+		obj.setSenha(pe.encode(obj.getSenha()));
 		usuarioRepository.save(obj);
 	}
 	
@@ -53,7 +57,7 @@ public class UsuarioService {
 	
 	private void updateData(Usuario newObj, Usuario obj) {
 		newObj.setNome(obj.getNome());
-		newObj.setSenha(obj.getSenha());
+		newObj.setSenha(pe.encode(obj.getSenha()));
 		newObj.setEmail(obj.getEmail());
 	}
 	
