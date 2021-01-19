@@ -2,6 +2,7 @@ package com.estoque.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +21,8 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private BCryptPasswordEncoder pe;
+	@Autowired
+	private EmailService emailservice;
 	
 	public Usuario find(Integer id) throws ObjectNotFoundException {
 		Optional<Usuario> obj = usuarioRepository.findById(id);
@@ -71,6 +74,29 @@ public class UsuarioService {
 		}
 		return id;
 	}
-
-
+	
+	public void recuperaSenha(String email) throws ObjectNotFoundException {
+		List<Usuario> users = usuarioRepository.findAll();
+		for(Usuario user : users) {
+			if(user.getEmail().equals(email)) {
+				user.setSenha(senhaNova());				
+				emailservice.recuperarSenha(user);
+				update(user);
+			}
+		}		
+	}
+	
+	private String senhaNova() {
+		Random gerador = new Random();
+		String senha ="";
+		String s1 ="" + gerador.nextInt(5);
+		String s2 ="" + gerador.nextInt(5);
+		String s3 ="" + gerador.nextInt(5);
+		String s4 ="" + gerador.nextInt(5);
+		String s5 ="" + gerador.nextInt(5);
+		
+		senha = s1 + s2 + s3 + s4 + s5;
+        
+        return senha;
+	}
 }

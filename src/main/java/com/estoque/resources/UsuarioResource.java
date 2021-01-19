@@ -56,5 +56,10 @@ public class UsuarioResource {
 		obj.setId(id);
 		usuarioService.update(obj);
 	}
+	
+	@RequestMapping(value="/senha/{email}", method=RequestMethod.GET)
+	public void recuperarSenha(@PathVariable String email) throws ObjectNotFoundException{
+		usuarioService.recuperaSenha(email);		
+	}
 
 }
