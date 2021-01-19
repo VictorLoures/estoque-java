@@ -24,7 +24,7 @@ public class JWTUtil {
 		setId(id);
 		return Jwts.builder().setSubject(username).setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
-		
+
 	}
 
 	public void setUsuarioLogado(String username) {
@@ -34,7 +34,7 @@ public class JWTUtil {
 	public String getUsername() {
 		return username;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}

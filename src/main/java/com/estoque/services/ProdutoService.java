@@ -1,6 +1,5 @@
 package com.estoque.services;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,11 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.estoque.domain.Categoria;
 import com.estoque.domain.Produtos;
-import com.estoque.domain.Usuario;
 import com.estoque.dto.ProdutosDTO;
 import com.estoque.repository.CategoriaRepository;
 import com.estoque.repository.ProdutosRepository;
-import com.estoque.repository.UsuarioRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -24,8 +21,6 @@ public class ProdutoService {
 	private ProdutosRepository produtosRepository;
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 	
 	public Produtos find(Integer id) throws ObjectNotFoundException {
 		Optional<Produtos> obj = produtosRepository.findById(id);
@@ -65,13 +60,6 @@ public class ProdutoService {
 				obj.setCategoria(cat);	
 			}
 		}
-		
-		List<Usuario> users = usuarioRepository.findAll();
-		for(Usuario user : users) {
-			if(user.getNome().equals(nome)) {
-				user.getProdutos().addAll(Arrays.asList(obj));	
-			}
-		}		
 		
 		produtosRepository.save(obj);		
 	}

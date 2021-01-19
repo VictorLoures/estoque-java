@@ -8,7 +8,7 @@ public class SmtpEmailService extends AbstractEmailService{
 
 	@Autowired
 	private MailSender mailSender;
-	
+
 	@Override
 	public void sendEmail(SimpleMailMessage message) {
 		mailSender.send(message);		

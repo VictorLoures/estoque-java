@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.estoque.domain.Produtos;
 import com.estoque.dto.ProdutosDTO;
 import com.estoque.security.JWTUtil;
-import com.estoque.services.NativeScriptService;
 import com.estoque.services.ProdutoService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -25,8 +24,6 @@ public class ProdutosResource {
 
 	@Autowired
 	private ProdutoService produtoService;
-	@Autowired
-	private NativeScriptService nss;
 	@Autowired
 	private JWTUtil jwtUtil;
 	
@@ -57,7 +54,6 @@ public class ProdutosResource {
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable Integer id) {
-		nss.execute("DELETE FROM `produtos_cliente` WHERE produtos_id = " + id + " ;");
 		produtoService.delet(id);		
 	}
 	

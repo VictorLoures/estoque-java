@@ -40,9 +40,6 @@ public class EstoqueApplication implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Informática", "Erica");
 		Categoria cat2 = new Categoria(null, "Cama, Mesa e Banho", "Erica");
 		
-		u1.getCategorias().addAll(Arrays.asList(cat1, cat2));
-
-		
 		Produtos p1 = new Produtos(null, "Computador", 2000.00, 1);
 		Produtos p2 = new Produtos(null, "Impressora", 800.00, 1);
 		Produtos p3 = new Produtos(null, "Toalha", 30.00, 1);
@@ -54,15 +51,11 @@ public class EstoqueApplication implements CommandLineRunner {
 		p2.setCategoria(cat1);
 		p3.setCategoria(cat2);
 		
-		u1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		
 		Usuario u2 = new Usuario(null, "Victor", pe.encode("123"), "victorloures10@gmail.com");
 		u2.addPerfil(Perfil.ADMIN);
 		
 		Categoria cat3 = new Categoria(null, "Movéis", "Victor");
 		Categoria cat4 = new Categoria(null, "Peças de Carro", "Victor");
-		
-		u2.getCategorias().addAll(Arrays.asList(cat3, cat4));
 		
 		Produtos p4 = new Produtos(null, "Roda", 200.00, 1);
 		Produtos p5 = new Produtos(null, "Cama", 800.00, 1);
@@ -74,8 +67,7 @@ public class EstoqueApplication implements CommandLineRunner {
 		p4.setCategoria(cat4);
 		p5.setCategoria(cat3);
 		p6.setCategoria(cat3);
-		
-		u2.getProdutos().addAll(Arrays.asList(p4, p5, p6));
+	
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
 		produtosRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));

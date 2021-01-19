@@ -10,7 +10,7 @@ public abstract class AbstractEmailService implements EmailService {
 
 	@Value("${default.sender}")
 	private String sender;
-	
+
 	@Override
 	public void recuperarSenha(Usuario user) {
 		SimpleMailMessage sm = prepareSimpleMailMessage(user);
@@ -25,5 +25,5 @@ public abstract class AbstractEmailService implements EmailService {
 		sm.setText("Nova senha: " + user.getSenha());
 		return sm;	
 	}
-	
+
 }

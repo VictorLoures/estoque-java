@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,11 +28,6 @@ public class Categoria implements Serializable{
 	@JsonIgnore
 	@OneToMany (mappedBy = "categorias", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Produtos> produtos = new ArrayList<Produtos>();
-	
-	@JsonIgnore
-	@ManyToMany(mappedBy = "categorias", cascade = CascadeType.REFRESH)
-	private List<Usuario> usuarios = new ArrayList<Usuario>();
-
 	
 	public Categoria() {}
 

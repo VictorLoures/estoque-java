@@ -85,7 +85,7 @@ public class UsuarioService {
 			}
 		}		
 	}
-	
+
 	private String senhaNova() {
 		Random gerador = new Random();
 		String senha ="";
@@ -94,9 +94,11 @@ public class UsuarioService {
 		String s3 ="" + gerador.nextInt(5);
 		String s4 ="" + gerador.nextInt(5);
 		String s5 ="" + gerador.nextInt(5);
-		
+
 		senha = s1 + s2 + s3 + s4 + s5;
-        
+
         return senha;
 	}
+
+
 }

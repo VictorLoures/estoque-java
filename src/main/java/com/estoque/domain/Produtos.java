@@ -1,18 +1,13 @@
 package com.estoque.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Produtos implements Serializable{
@@ -31,10 +26,6 @@ public class Produtos implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categorias;
-	
-	@JsonIgnore
-	@ManyToMany(mappedBy = "produtos")
-	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	
 	public Produtos() {
 		
